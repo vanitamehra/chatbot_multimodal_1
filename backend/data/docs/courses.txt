@@ -1,0 +1,8 @@
+ProEd Institute offers the following courses:
+1. Data Science Bootcamp - Duration: 12 weeks
+2. Web Development - Duration: 10 weeks
+3. Machine Learning - Duration: 14 weeks
+4. Business Analytics - Duration: 8 weeks
+Contact us for enrollment details.
+
+“You can learn more at www.proed.com/courses.”

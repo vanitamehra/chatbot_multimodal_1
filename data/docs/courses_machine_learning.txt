@@ -1,0 +1,14 @@
+Course: Machine Learning 
+Duration: 14 weeks 
+Curriculum: 
+- Week 1: Python and Data Libraries (NumPy, Pandas) 
+- Week 2: Linear Algebra and Statistics Refresher 
+- Week 3-4: Supervised Learning (Regression, Classification) 
+- Week 5-6: Unsupervised Learning (Clustering, PCA) 
+- Week 7: Feature Engineering and Selection 
+- Week 8: Model Evaluation Metrics 
+- Week 9: Advanced ML (SVM, Ensemble Methods) 
+- Week 10-11: Neural Networks and Deep Learning Basics 
+- Week 12: NLP Fundamentals 
+- Week 13: Capstone Project 
+- Week 14: Model Deployment

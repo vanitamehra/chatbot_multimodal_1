@@ -1,0 +1,16 @@
+Admissions at ProEd Institute:
+
+- Batch start dates and application deadlines:
+    - Data Science: Batch starts Dec 2, 2025 | Application deadline Dec 1, 2025
+    - Machine Learning: Batch starts Dec 8, 2025 | Application deadline Dec 7, 2025
+    - Web Development: Batch starts Dec 19, 2025 | Application deadline Dec 18, 2025
+
+- Required documents: ID proof, transcript, resume, recommendation letter
+
+- Admission process:
+    1. Fill online application form
+    2. Take an interview with the admissions team
+    3. Make payment for the selected course
+    4. Receive confirmation email
+
+- Scholarships available for meritorious students

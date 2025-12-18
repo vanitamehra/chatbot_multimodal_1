@@ -1,0 +1,10 @@
+Course: Data Science Bootcamp
+Duration: 12 weeks
+Curriculum:
+- Week 1-2: Python Programming and Data Analysis
+- Week 3-4: Statistics and Probability
+- Week 5-6: Data Visualization (Matplotlib, Seaborn)
+- Week 7-8: Machine Learning Basics (Regression, Classification)
+- Week 9-10: Advanced ML (Clustering, NLP, Deep Learning)
+- Week 11: Capstone Project
+- Week 12: Deployment and Presentation , this is data science txt

@@ -1,0 +1,13 @@
+Course: Web Development
+Duration: 10 weeks
+Curriculum:
+- Week 1: HTML, CSS Basics 
+- Week 2: Advanced CSS, Flexbox, Grid 
+- Week 3: JavaScript Fundamentals 
+- Week 4: DOM Manipulation and Events 
+- Week 5: Frontend Frameworks (React Basics) 
+- Week 6: Backend Basics (Node.js, Express) 
+- Week 7: Database (MongoDB / SQL) 
+- Week 8: REST APIs 
+- Week 9: Project Work 
+- Week 10: Deployment (Netlify / Heroku)

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - ProEd Institute</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-4 flex justify-between items-center shadow">
+        <div class="font-bold text-xl">ProEd Institute</div>
+        <div class="space-x-4">
+            <a href="index.html" class="hover:underline">Home</a>
+            <a href="courses.html" class="hover:underline">Courses</a>
+            <a href="contact.html" class="hover:underline">Contact</a>
+            <a href="chatbot.html" class="hover:underline">Chatbot</a>
+        </div>
+    </nav>
+
+    <!-- Contact Info Section -->
+    <section class="py-8 px-6 max-w-2xl mx-auto bg-white rounded shadow mt-8">
+        <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">Contact Information</h1>
+        <ul class="space-y-3 text-gray-700 text-lg">
+            <li><strong>Email:</strong> <a href="mailto:pcontact@proed.com" class="text-blue-600 hover:underline">pcontact@proed.com</a></li>
+            <li><strong>Phone:</strong> <a href="tel:+11234567890" class="text-blue-600 hover:underline">+1-123-456-7890</a></li>
+            <li><strong>Address:</strong> 123 Learning Street, Knowledge City, USA</li>
+            <li><strong>Office Hours:</strong> Mon-Fri 9:00 AM - 6:00 PM</li>
+        </ul>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-8 px-6 max-w-2xl mx-auto mt-8">
+        <h1 class="text-3xl font-bold mb-8 text-center text-blue-600">Send Us a Message</h1>
+
+        <form class="bg-white p-8 rounded shadow space-y-4">
+            <div>
+                <label class="block text-gray-700 font-semibold mb-1" for="name">Name</label>
+                <input class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-400" type="text" id="name" placeholder="Your Name" required>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-semibold mb-1" for="email">Email</label>
+                <input class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-400" type="email" id="email" placeholder="Your Email" required>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-semibold mb-1" for="message">Message</label>
+                <textarea class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-400" id="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+
+            <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition" type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white text-center p-6 mt-12">
+        <p>© 2025 ProEd Institute</p>
+    </footer>
+
+</body>
+</html>
