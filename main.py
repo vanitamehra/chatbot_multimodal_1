@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
+
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 from TTS.api import TTS
@@ -100,7 +101,7 @@ def speak_friendly(text):
     # Convert only emails or specific symbols
     text = text.replace("pcontact@proed.com", "p contact at pro ed dot com")
     text = text.replace("proed", "pro ed")
-    replacements = {"@": " at ", ".": " dot ", "-": " dash ", "/": " slash "}
+    replacements = {"@": " at ", "-": " dash ", "/": " slash "}
     for k, v in replacements.items():
         text = text.replace(k, v)
     return text
@@ -192,53 +193,60 @@ def chat_endpoint(query: Query):
 # API: Audio → WAV (STT → RAG → TTS)
 # ---------------------------------------------------------
 
+# -----------------------------
+# API: Audio → STT → RAG → TTS
+# -----------------------------
+
 @app.post("/chat_audio")
 async def chat_audio(request: Request):
-    try:
-        audio_bytes = await request.body()
+    audio_bytes = await request.body()
 
-        # Save temp input WAV
-        tmp_input = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+    # Save temp input WAV
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_input:
         tmp_input.write(audio_bytes)
-        tmp_input.flush()
+        input_path = tmp_input.name
 
-        # STT: convert audio → text
-        stt_result = stt_model.transcribe(tmp_input.name)
-        query_text = stt_result["text"].strip()
+    try:
+        # STT: Audio → Text
+        stt_result = stt_model.transcribe(input_path)
+        user_text = stt_result["text"].strip()
 
-        # Handle short greetings or simple queries directly
+        # Generate bot response
         greetings = ["hello", "hi", "hey", "greetings"]
-        if query_text.lower() in greetings:
-            answer_text = "Hello! How can I assist you with courses or admissions?"
-        elif "weather" in query_text.lower() or "rain" in query_text.lower():
-            answer_text = "I can only provide information about courses or enrollment."
+        if user_text.lower() in greetings:
+            bot_text = "Hello! How can I assist you with courses or admissions?"
+        elif "weather" in user_text.lower() or "rain" in user_text.lower():
+            bot_text = "I can only provide information about courses or enrollment."
         else:
-            # Normal RAG processing
-            answer_text = run_rag(query_text)
-            answer_text = speak_friendly(answer_text)
+            bot_text = run_rag(user_text)
+            bot_text = speak_friendly(bot_text)
 
-        # TTS output WAV
+        # TTS: Generate audio
         tmp_output = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
-        tts.tts_to_file(text=answer_text, file_path=tmp_output.name)
+        tts.tts_to_file(text=bot_text, file_path=tmp_output.name)
+        tmp_output.close()
 
-        # Return both text + audio URL
+        audio_url = f"/play_audio/{os.path.basename(tmp_output.name)}"
+
         return {
-            "text": answer_text,
-            "audio_url": f"/play_audio/{os.path.basename(tmp_output.name)}"
+            "user_text": user_text,
+            "bot_text": bot_text,
+            "audio_url": audio_url
         }
 
-    except Exception as e:
-        # Catch any errors
-        return {"error": str(e)}
+    finally:
+        # Safe cleanup of input file
+        if os.path.exists(input_path):
+            os.unlink(input_path)
 
-
-# New endpoint to serve audio
 @app.get("/play_audio/{filename}")
 def play_audio(filename: str):
     file_path = os.path.join(tempfile.gettempdir(), filename)
     if os.path.exists(file_path):
-        return StreamingResponse(open(file_path, "rb"), media_type="audio/wav")
-    return {"error": "Audio not found"}
+        return FileResponse(file_path, media_type="audio/wav")
+    return {"error": "File not found"}
+
+
 
 
 # ---------------------------------------------------------

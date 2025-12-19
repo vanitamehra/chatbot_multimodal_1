@@ -51,6 +51,10 @@ sendBtn.addEventListener("click", async () => {
 // ------------------------------
 // Audio → STT → RAG → TTS endpoint
 // ------------------------------
+
+// ------------------------------
+// Audio → STT → RAG → TTS endpoint
+// ------------------------------
 talkBtn.addEventListener("click", async () => {
     if (!isRecording) {
         // Start recording
@@ -65,8 +69,8 @@ talkBtn.addEventListener("click", async () => {
         recorder.onstop = async () => {
             const audioBlob = new Blob(recordedChunks, { type: "audio/wav" });
 
-            // Send audio to server
             try {
+                // Send audio to backend
                 const response = await fetch("http://localhost:8000/chat_audio", {
                     method: "POST",
                     body: audioBlob
@@ -74,9 +78,14 @@ talkBtn.addEventListener("click", async () => {
 
                 if (!response.ok) throw new Error("Server error");
 
-                const audioData = await response.blob();
-                const audioUrl = URL.createObjectURL(audioData);
-                const audio = new Audio(audioUrl);
+                const data = await response.json();
+
+                // Display text
+                appendMessage("user", data.user_text);
+                appendMessage("bot", data.bot_text);
+
+                // Play audio
+                const audio = new Audio(data.audio_url);
                 audio.play();
 
             } catch (err) {
@@ -95,3 +104,4 @@ talkBtn.addEventListener("click", async () => {
         talkBtn.textContent = "Talk";
     }
 });
+
